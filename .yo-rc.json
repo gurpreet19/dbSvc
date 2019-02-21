@@ -1,0 +1,33 @@
+{
+    "generator-jhipster": {
+        "promptValues": {
+            "packageName": "com.infy.db"
+        },
+        "jhipsterVersion": "5.7.2",
+        "applicationType": "monolith",
+        "baseName": "dbSvc",
+        "packageName": "com.infy.db",
+        "packageFolder": "com/infy/db",
+        "serverPort": "8080",
+        "authenticationType": "jwt",
+        "cacheProvider": "ehcache",
+        "enableHibernateCache": true,
+        "websocket": false,
+        "databaseType": "sql",
+        "devDatabaseType": "h2Memory",
+        "prodDatabaseType": "mysql",
+        "searchEngine": false,
+        "messageBroker": false,
+        "serviceDiscoveryType": false,
+        "buildTool": "maven",
+        "enableSwaggerCodegen": true,
+        "jwtSecretKey": "MWI5YTUwZmExYzE4NjVjZTdlZGU4YTY2MGNkMTJlMDE2MzkxODc5MzRhOTFlZTMyNWM2NTllOThiOTVmNjhjYzdhNjRjNTY0OGM2ODNkMTMyZmYxNjE1YjFlMGE0Mzg2ODhkMWQ4NThjOTQ2MDkxOTExM2E5MDNlNjdlZTllOGM=",
+        "clientFramework": "angularX",
+        "useSass": false,
+        "clientPackageManager": "npm",
+        "testFrameworks": ["protractor"],
+        "jhiPrefix": "jhi",
+        "otherModules": [],
+        "enableTranslation": false
+    }
+}
