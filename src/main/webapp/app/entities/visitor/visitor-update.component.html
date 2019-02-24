@@ -1,0 +1,197 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-visitor-heading">Create or edit a Visitor</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!visitor.id">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="visitor.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_name">Name</label>
+                    <input type="text" class="form-control" name="name" id="field_name"
+                        [(ngModel)]="visitor.name" required minlength="3" maxlength="25"/>
+                    <div [hidden]="!(editForm.controls.name?.dirty && editForm.controls.name?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.name?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.name?.errors?.minlength">
+                        This field is required to be at least 3 characters.
+                        </small>
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.name?.errors?.maxlength">
+                        This field cannot be longer than 25 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_visitorId">Visitor Id</label>
+                    <input type="number" class="form-control" name="visitorId" id="field_visitorId"
+                        [(ngModel)]="visitor.visitorId" required/>
+                    <div [hidden]="!(editForm.controls.visitorId?.dirty && editForm.controls.visitorId?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.visitorId?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.visitorId?.errors?.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_type">Type</label>
+                    <select class="form-control" name="type" [(ngModel)]="visitor.type" id="field_type"  required>
+                        <option value="NEWJOINEE">NEWJOINEE</option>
+                        <option value="EMPLOYEE">EMPLOYEE</option>
+                        <option value="VISITOR">VISITOR</option>
+                        <option value="VIP">VIP</option>
+                        <option value="FAMILY">FAMILY</option>
+                        <option value="CONFERENCEATTENDEE">CONFERENCEATTENDEE</option>
+                        <option value="CLIENT">CLIENT</option>
+                        <option value="VENDOR">VENDOR</option>
+                        <option value="INTERVIEWEE">INTERVIEWEE</option>
+                        <option value="GUEST">GUEST</option>
+                    </select>
+                    <div [hidden]="!(editForm.controls.type?.dirty && editForm.controls.type?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.type?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_allowedFrom">Allowed From</label>
+                    <div class="d-flex">
+                        <input id="field_allowedFrom" type="datetime-local" class="form-control" name="allowedFrom" [(ngModel)]="allowedFrom"
+                        required/>
+                    </div>
+                    <div [hidden]="!(editForm.controls.allowedFrom?.dirty && editForm.controls.allowedFrom?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.allowedFrom?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.allowedFrom?.errors?.ZonedDateTimelocal">
+                            This field should be a date and time.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_allowedTo">Allowed To</label>
+                    <div class="d-flex">
+                        <input id="field_allowedTo" type="datetime-local" class="form-control" name="allowedTo" [(ngModel)]="allowedTo"
+                        required/>
+                    </div>
+                    <div [hidden]="!(editForm.controls.allowedTo?.dirty && editForm.controls.allowedTo?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.allowedTo?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.allowedTo?.errors?.ZonedDateTimelocal">
+                            This field should be a date and time.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_location">Location</label>
+                    <input type="text" class="form-control" name="location" id="field_location"
+                        [(ngModel)]="visitor.location" required/>
+                    <div [hidden]="!(editForm.controls.location?.dirty && editForm.controls.location?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.location?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_email">Email</label>
+                    <input type="text" class="form-control" name="email" id="field_email"
+                        [(ngModel)]="visitor.email" required pattern="^[a-zA-Z0-9]*$"/>
+                    <div [hidden]="!(editForm.controls.email?.dirty && editForm.controls.email?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.email?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.email?.errors?.pattern">
+                            This field should follow pattern for "Email".
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_phone">Phone</label>
+                    <input type="number" class="form-control" name="phone" id="field_phone"
+                        [(ngModel)]="visitor.phone" required min="1000000000" jhiMin="1000000000" max="9999999999" jhiMax="9999999999"/>
+                    <div [hidden]="!(editForm.controls.phone?.dirty && editForm.controls.phone?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.phone?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.phone?.errors?.min">
+                            This field should be at least 1000000000.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.phone?.errors?.max">
+                            This field cannot be more than 9999999999.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.phone?.errors?.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_status">Status</label>
+                    <input type="checkbox" class="form-control" name="status" id="field_status"
+                        [(ngModel)]="visitor.status" />
+                    <div [hidden]="!(editForm.controls.status?.dirty && editForm.controls.status?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.status?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_qrString">Qr String</label>
+                    <input type="text" class="form-control" name="qrString" id="field_qrString"
+                        [(ngModel)]="visitor.qrString" required/>
+                    <div [hidden]="!(editForm.controls.qrString?.dirty && editForm.controls.qrString?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.qrString?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_employee">Employee</label>
+                    <select class="form-control" id="field_employee" name="employee" [(ngModel)]="visitor.employee"  required>
+                        <option *ngIf="!editForm.value.employee" [ngValue]="null" selected></option>
+                        <option [ngValue]="employeeOption.id === visitor.employee?.id ? visitor.employee : employeeOption" *ngFor="let employeeOption of employees; trackBy: trackEmployeeById">{{employeeOption.employeeId}}</option>
+                    </select>
+                </div>
+                <div [hidden]="!(editForm.controls.employee?.dirty && editForm.controls.employee?.invalid)">
+                    <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.employee?.errors?.required">
+                        This field is required.
+                    </small>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span>Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span>Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

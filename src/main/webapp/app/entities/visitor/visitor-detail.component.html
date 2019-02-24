@@ -1,0 +1,69 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="visitor">
+            <h2><span>Visitor</span> {{visitor.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span>Name</span></dt>
+                <dd>
+                    <span>{{visitor.name}}</span>
+                </dd>
+                <dt><span>Visitor Id</span></dt>
+                <dd>
+                    <span>{{visitor.visitorId}}</span>
+                </dd>
+                <dt><span>Type</span></dt>
+                <dd>
+                    <span>{{visitor.type}}</span>
+                </dd>
+                <dt><span>Allowed From</span></dt>
+                <dd>
+                    <span>{{visitor.allowedFrom}}</span>
+                </dd>
+                <dt><span>Allowed To</span></dt>
+                <dd>
+                    <span>{{visitor.allowedTo}}</span>
+                </dd>
+                <dt><span>Location</span></dt>
+                <dd>
+                    <span>{{visitor.location}}</span>
+                </dd>
+                <dt><span>Email</span></dt>
+                <dd>
+                    <span>{{visitor.email}}</span>
+                </dd>
+                <dt><span>Phone</span></dt>
+                <dd>
+                    <span>{{visitor.phone}}</span>
+                </dd>
+                <dt><span>Status</span></dt>
+                <dd>
+                    <span>{{visitor.status}}</span>
+                </dd>
+                <dt><span>Qr String</span></dt>
+                <dd>
+                    <span>{{visitor.qrString}}</span>
+                </dd>
+                <dt><span>Employee</span></dt>
+                <dd>
+                    <div *ngIf="visitor.employee">
+                        <a [routerLink]="['/employee', visitor.employee?.id, 'view']">{{visitor.employee?.employeeId}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/visitor', visitor.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

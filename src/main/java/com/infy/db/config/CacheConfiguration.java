@@ -38,6 +38,11 @@ public class CacheConfiguration {
             cm.createCache(com.infy.db.domain.User.class.getName(), jcacheConfiguration);
             cm.createCache(com.infy.db.domain.Authority.class.getName(), jcacheConfiguration);
             cm.createCache(com.infy.db.domain.User.class.getName() + ".authorities", jcacheConfiguration);
+            cm.createCache(com.infy.db.domain.Employee.class.getName(), jcacheConfiguration);
+            cm.createCache(com.infy.db.domain.Movement.class.getName(), jcacheConfiguration);
+            cm.createCache(com.infy.db.domain.Visitor.class.getName(), jcacheConfiguration);
+            cm.createCache(com.infy.db.domain.Employee.class.getName() + ".visitors", jcacheConfiguration);
+            cm.createCache(com.infy.db.domain.Visitor.class.getName() + ".movements", jcacheConfiguration);
             // jhipster-needle-ehcache-add-entry
         };
     }
