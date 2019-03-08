@@ -27,11 +27,11 @@ spring:
             enabled: false
     datasource:
         type: com.zaxxer.hikari.HikariDataSource
-        url: jdbc:mysql://localhost:3306/dbSvc?useUnicode=true&characterEncoding=utf8&useSSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC
-        username: root
-        password:
+        url: jdbc:mysql://us-cdbr-iron-east-03.cleardb.net/ad_136d73bacf7cdd6?user=bd229f697d07ab&password=c25815b2
+        username: bd229f697d07
+        password: c25815b2
         hikari:
-            auto-commit: false
+            auto-commit: true
             data-source-properties:
                 cachePrepStmts: true
                 prepStmtCacheSize: 250

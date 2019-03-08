@@ -21,7 +21,7 @@ describe('Service Tests', () => {
             service = injector.get(EmployeeService);
             httpMock = injector.get(HttpTestingController);
 
-            elemDefault = new Employee(0, 0, 'AAAAAAA');
+            elemDefault = new Employee(0, 0, 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', 'AAAAAAA');
         });
 
         describe('Service methods', async () => {
@@ -56,7 +56,10 @@ describe('Service Tests', () => {
                 const returnedFromService = Object.assign(
                     {
                         employeeId: 1,
-                        employeeName: 'BBBBBB'
+                        employeeName: 'BBBBBB',
+                        photo: 'BBBBBB',
+                        email: 'BBBBBB',
+                        password: 'BBBBBB'
                     },
                     elemDefault
                 );
@@ -74,7 +77,10 @@ describe('Service Tests', () => {
                 const returnedFromService = Object.assign(
                     {
                         employeeId: 1,
-                        employeeName: 'BBBBBB'
+                        employeeName: 'BBBBBB',
+                        photo: 'BBBBBB',
+                        email: 'BBBBBB',
+                        password: 'BBBBBB'
                     },
                     elemDefault
                 );

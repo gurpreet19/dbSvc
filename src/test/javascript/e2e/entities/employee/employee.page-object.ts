@@ -28,6 +28,9 @@ export class EmployeeUpdatePage {
     cancelButton = element(by.id('cancel-save'));
     employeeIdInput = element(by.id('field_employeeId'));
     employeeNameInput = element(by.id('field_employeeName'));
+    photoInput = element(by.id('field_photo'));
+    emailInput = element(by.id('field_email'));
+    passwordInput = element(by.id('field_password'));
 
     async getPageTitle() {
         return this.pageTitle.getText();
@@ -47,6 +50,30 @@ export class EmployeeUpdatePage {
 
     async getEmployeeNameInput() {
         return this.employeeNameInput.getAttribute('value');
+    }
+
+    async setPhotoInput(photo) {
+        await this.photoInput.sendKeys(photo);
+    }
+
+    async getPhotoInput() {
+        return this.photoInput.getAttribute('value');
+    }
+
+    async setEmailInput(email) {
+        await this.emailInput.sendKeys(email);
+    }
+
+    async getEmailInput() {
+        return this.emailInput.getAttribute('value');
+    }
+
+    async setPasswordInput(password) {
+        await this.passwordInput.sendKeys(password);
+    }
+
+    async getPasswordInput() {
+        return this.passwordInput.getAttribute('value');
     }
 
     async save() {

@@ -35,6 +35,16 @@ public class Employee implements Serializable {
     @Column(name = "employee_name", length = 25, nullable = false)
     private String employeeName;
 
+    @Column(name = "photo")
+    private String photo;
+
+    @NotNull
+    @Column(name = "email", nullable = false)
+    private String email;
+
+    @Column(name = "jhi_password")
+    private String password;
+
     @OneToMany(mappedBy = "employee")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Visitor> visitors = new HashSet<>();
@@ -71,6 +81,45 @@ public class Employee implements Serializable {
 
     public void setEmployeeName(String employeeName) {
         this.employeeName = employeeName;
+    }
+
+    public String getPhoto() {
+        return photo;
+    }
+
+    public Employee photo(String photo) {
+        this.photo = photo;
+        return this;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public Employee email(String email) {
+        this.email = email;
+        return this;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public Employee password(String password) {
+        this.password = password;
+        return this;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public Set<Visitor> getVisitors() {
@@ -125,6 +174,9 @@ public class Employee implements Serializable {
             "id=" + getId() +
             ", employeeId=" + getEmployeeId() +
             ", employeeName='" + getEmployeeName() + "'" +
+            ", photo='" + getPhoto() + "'" +
+            ", email='" + getEmail() + "'" +
+            ", password='" + getPassword() + "'" +
             "}";
     }
 }

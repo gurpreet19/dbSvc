@@ -47,6 +47,15 @@ public class EmployeeResourceIntTest {
     private static final String DEFAULT_EMPLOYEE_NAME = "AAAAAAAAAA";
     private static final String UPDATED_EMPLOYEE_NAME = "BBBBBBBBBB";
 
+    private static final String DEFAULT_PHOTO = "AAAAAAAAAA";
+    private static final String UPDATED_PHOTO = "BBBBBBBBBB";
+
+    private static final String DEFAULT_EMAIL = "AAAAAAAAAA";
+    private static final String UPDATED_EMAIL = "BBBBBBBBBB";
+
+    private static final String DEFAULT_PASSWORD = "AAAAAAAAAA";
+    private static final String UPDATED_PASSWORD = "BBBBBBBBBB";
+
     @Autowired
     private EmployeeRepository employeeRepository;
 
@@ -93,7 +102,10 @@ public class EmployeeResourceIntTest {
     public static Employee createEntity(EntityManager em) {
         Employee employee = new Employee()
             .employeeId(DEFAULT_EMPLOYEE_ID)
-            .employeeName(DEFAULT_EMPLOYEE_NAME);
+            .employeeName(DEFAULT_EMPLOYEE_NAME)
+            .photo(DEFAULT_PHOTO)
+            .email(DEFAULT_EMAIL)
+            .password(DEFAULT_PASSWORD);
         return employee;
     }
 
@@ -119,6 +131,9 @@ public class EmployeeResourceIntTest {
         Employee testEmployee = employeeList.get(employeeList.size() - 1);
         assertThat(testEmployee.getEmployeeId()).isEqualTo(DEFAULT_EMPLOYEE_ID);
         assertThat(testEmployee.getEmployeeName()).isEqualTo(DEFAULT_EMPLOYEE_NAME);
+        assertThat(testEmployee.getPhoto()).isEqualTo(DEFAULT_PHOTO);
+        assertThat(testEmployee.getEmail()).isEqualTo(DEFAULT_EMAIL);
+        assertThat(testEmployee.getPassword()).isEqualTo(DEFAULT_PASSWORD);
     }
 
     @Test
@@ -178,6 +193,24 @@ public class EmployeeResourceIntTest {
 
     @Test
     @Transactional
+    public void checkEmailIsRequired() throws Exception {
+        int databaseSizeBeforeTest = employeeRepository.findAll().size();
+        // set the field null
+        employee.setEmail(null);
+
+        // Create the Employee, which fails.
+
+        restEmployeeMockMvc.perform(post("/api/employees")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(employee)))
+            .andExpect(status().isBadRequest());
+
+        List<Employee> employeeList = employeeRepository.findAll();
+        assertThat(employeeList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     public void getAllEmployees() throws Exception {
         // Initialize the database
         employeeRepository.saveAndFlush(employee);
@@ -188,7 +221,10 @@ public class EmployeeResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(employee.getId().intValue())))
             .andExpect(jsonPath("$.[*].employeeId").value(hasItem(DEFAULT_EMPLOYEE_ID)))
-            .andExpect(jsonPath("$.[*].employeeName").value(hasItem(DEFAULT_EMPLOYEE_NAME.toString())));
+            .andExpect(jsonPath("$.[*].employeeName").value(hasItem(DEFAULT_EMPLOYEE_NAME.toString())))
+            .andExpect(jsonPath("$.[*].photo").value(hasItem(DEFAULT_PHOTO.toString())))
+            .andExpect(jsonPath("$.[*].email").value(hasItem(DEFAULT_EMAIL.toString())))
+            .andExpect(jsonPath("$.[*].password").value(hasItem(DEFAULT_PASSWORD.toString())));
     }
     
     @Test
@@ -203,7 +239,10 @@ public class EmployeeResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(employee.getId().intValue()))
             .andExpect(jsonPath("$.employeeId").value(DEFAULT_EMPLOYEE_ID))
-            .andExpect(jsonPath("$.employeeName").value(DEFAULT_EMPLOYEE_NAME.toString()));
+            .andExpect(jsonPath("$.employeeName").value(DEFAULT_EMPLOYEE_NAME.toString()))
+            .andExpect(jsonPath("$.photo").value(DEFAULT_PHOTO.toString()))
+            .andExpect(jsonPath("$.email").value(DEFAULT_EMAIL.toString()))
+            .andExpect(jsonPath("$.password").value(DEFAULT_PASSWORD.toString()));
     }
 
     @Test
@@ -228,7 +267,10 @@ public class EmployeeResourceIntTest {
         em.detach(updatedEmployee);
         updatedEmployee
             .employeeId(UPDATED_EMPLOYEE_ID)
-            .employeeName(UPDATED_EMPLOYEE_NAME);
+            .employeeName(UPDATED_EMPLOYEE_NAME)
+            .photo(UPDATED_PHOTO)
+            .email(UPDATED_EMAIL)
+            .password(UPDATED_PASSWORD);
 
         restEmployeeMockMvc.perform(put("/api/employees")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -241,6 +283,9 @@ public class EmployeeResourceIntTest {
         Employee testEmployee = employeeList.get(employeeList.size() - 1);
         assertThat(testEmployee.getEmployeeId()).isEqualTo(UPDATED_EMPLOYEE_ID);
         assertThat(testEmployee.getEmployeeName()).isEqualTo(UPDATED_EMPLOYEE_NAME);
+        assertThat(testEmployee.getPhoto()).isEqualTo(UPDATED_PHOTO);
+        assertThat(testEmployee.getEmail()).isEqualTo(UPDATED_EMAIL);
+        assertThat(testEmployee.getPassword()).isEqualTo(UPDATED_PASSWORD);
     }
 
     @Test

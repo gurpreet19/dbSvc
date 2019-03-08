@@ -38,9 +38,18 @@ describe('Employee e2e test', () => {
         const nbButtonsBeforeCreate = await employeeComponentsPage.countDeleteButtons();
 
         await employeeComponentsPage.clickOnCreateButton();
-        await promise.all([employeeUpdatePage.setEmployeeIdInput('5'), employeeUpdatePage.setEmployeeNameInput('employeeName')]);
+        await promise.all([
+            employeeUpdatePage.setEmployeeIdInput('5'),
+            employeeUpdatePage.setEmployeeNameInput('employeeName'),
+            employeeUpdatePage.setPhotoInput('photo'),
+            employeeUpdatePage.setEmailInput('email'),
+            employeeUpdatePage.setPasswordInput('password')
+        ]);
         expect(await employeeUpdatePage.getEmployeeIdInput()).to.eq('5');
         expect(await employeeUpdatePage.getEmployeeNameInput()).to.eq('employeeName');
+        expect(await employeeUpdatePage.getPhotoInput()).to.eq('photo');
+        expect(await employeeUpdatePage.getEmailInput()).to.eq('email');
+        expect(await employeeUpdatePage.getPasswordInput()).to.eq('password');
         await employeeUpdatePage.save();
         expect(await employeeUpdatePage.getSaveButton().isPresent()).to.be.false;
 
